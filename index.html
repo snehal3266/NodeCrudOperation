@@ -22,7 +22,7 @@
 
 <script>
     $(document).ready(function () {
-        
+
         loaddata();
 
     });
@@ -35,7 +35,7 @@
         for (let i = 1; i < rowcount; i++) {
             table.deleteRow(1);
         }
-        let mydata = {
+       let mydata = { 
             "data": {
                 "id": 0
             }
@@ -93,7 +93,7 @@
                     loaddata();
                 },
                 error: function (err) {
-                    console.log(err)
+                    console.log("Error");
                 }
             });
 

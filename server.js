@@ -64,7 +64,7 @@ app.post("/save", function (req, res) {
     });
     con.connect(function (err) {
 
-        console.log("error");
+        console.log({data:{status:"success"}});
 
     });
     var query;
@@ -77,7 +77,7 @@ app.post("/save", function (req, res) {
 
     con.query(query, function (err, result) {
         console.log("inserted");
-        res.end("success");
+        res.send({data:{status:"success"}});
     });
     
 });
@@ -120,7 +120,7 @@ app.post("/get", function (req, res) {
     });
     con.connect(function (err) {
 
-        console.log("error");
+        console.log(err);
 
     });
     var query;
@@ -132,7 +132,7 @@ app.post("/get", function (req, res) {
     }
 
     con.query(query, function (err, result) {
-        console.log("reading");
+        console.log("inserted");
         res.send({data:result});
     });
     
