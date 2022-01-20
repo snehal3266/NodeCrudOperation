@@ -22,13 +22,19 @@
 
 <script>
     $(document).ready(function () {
-
+        
         loaddata();
+
     });
 
     function loaddata() {
-        let table = document.getElementById("mytable");
 
+        let table = document.getElementById("mytable");
+        let rowcount = table.rows.length;
+
+        for (let i = 1; i < rowcount; i++) {
+            table.deleteRow(1);
+        }
         let mydata = {
             "data": {
                 "id": 0
@@ -70,6 +76,7 @@
     }
 
     function deleteuser(userid) {
+
 
         if (confirm("Sure To Delete?")) {
 

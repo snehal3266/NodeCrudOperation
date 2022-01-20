@@ -35,6 +35,16 @@ app.get("/index", function (req, res) {
     });
 });
 
+app.get("/create", function (req, res) {
+
+    var header=fs.readFileSync("header.html");
+    var footer=fs.readFileSync("footer.html");
+    
+    fs.readFile("create.html",function(err,data){
+        res.send(header.toString()+data.toString()+footer.toString());
+    });
+});
+
 
 
 
@@ -85,7 +95,7 @@ app.post("/delete", function (req, res) {
     });
     con.connect(function (err) {
 
-        console.log("error");
+        console.log(err);
 
     });
     var query="delete from users WHERE id="+id;
