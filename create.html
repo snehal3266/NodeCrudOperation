@@ -5,28 +5,28 @@
             <label>Your Name*: 
                 <label id="msgname" style="color: red;"></label>
             </label>
-            <input type="text" name="name" id="name" placeholder="Enter Name" class="form-control">
+            <input type="text" name="name" onkeyup="validatename()" id="name" placeholder="Enter Name" class="form-control">
         </div>
 
         <div>
             <label>Your Email*: 
                 <label id="msgemail" style="color: red;"></label>
             </label>
-            <input type="email" name="email" id="email" placeholder="Enter email" class="form-control">
+            <input type="email" name="email" onkeyup="validateemail()" id="email" placeholder="Enter email" class="form-control">
         </div>
 
         <div>
             <label>Your Mobile_No*: 
                 <label id="msgmobile_no" style="color: red;"></label>
             </label>
-            <input type="number" name="mobile_no" id="mobile_no" placeholder="Enter mobile_no" class="form-control">
+            <input type="number" name="mobile_no" onkeyup="validatemobile_no()" id="mobile_no" placeholder="Enter mobile_no" class="form-control">
         </div>
 
         <div>
             <label>Your City*: 
                 <label id="msgcity" style="color: red;"></label>
             </label>
-            <input type="text" name="city" id="city" placeholder="Enter city" class="form-control">
+            <input type="text" name="city" onkeyup="validatecity()" id="city" placeholder="Enter city" class="form-control">
         </div> <br>
 
         <div>
@@ -37,6 +37,42 @@
 </main>
 
 <script>
+        function validatename(){
+            let name = $("#name").val();
+            
+            if(name.trim()!=""){
+                $("#msgname").html("");
+       
+            }
+        }
+        function validateemail(){
+            let email = $("#email").val();
+            
+            if(email.trim()!=""){
+                $("#msgemail").html("");
+       
+            }
+        }
+
+        function validatemobile_no(){
+            let mobile_no = $("#mobile_no").val();
+            
+            if(mobile_no.trim()!=""){
+                $("#msgmobile_no").html("");
+       
+            }
+        }
+
+        function validatecity(){
+            let city = $("#city").val();
+            
+            if(city.trim()!=""){
+                $("#msgcity").html("");
+       
+            }
+        }
+
+
     function submit() {
 
         let name = $("#name").val();
@@ -69,11 +105,22 @@
         if(mobile_no.trim()==""){
           $("#msgmobile_no").html("Enter Mobile No.!");
           validated=false;
+        }else{
+            if(phonevalidate(mobile_no)==false){
+                $("#msgmobile_no").html("Enter Valid Mobile_No");
+                validated=false;
+            }
         }
 
         if(city.trim()==""){
           $("#msgcity").html("Enter City!");
           validated=false;
+        }
+
+        if(validated){
+            alert("Form is Ready for Submit!");
+        }else{
+            alert("There is error for submitted Form!")
         }
 
     }
