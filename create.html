@@ -1,5 +1,6 @@
 <main style="margin-top: 90px;">
     <div class="container">
+        <input type="hidden" id="id" value="0" />
         <h1 style="text-align: center;"> <b> New Users Register Here! </b> </h1>
         <div>
             <label>Your Name*:
@@ -41,6 +42,37 @@
 </main>
 
 <script>
+    $(document).ready(function () {
+
+        let id = getUrlParameter("id");
+        if (id != false) {
+            $("#id").val(id);
+            let mydata = {
+                data: {
+                    id: $("#id").val()
+                }
+            };
+            $.ajax({
+                url: 'http://localhost:8081/get',
+                type: 'post',
+                data: mydata,
+                dataType: "json",
+                success: function (data) {
+                    let user = data["data"][0];
+                    $("#name").val(user.name);
+                    $("#email").val(user.email);
+                    $("#mobile_no").val(user.mobile_no);
+                    $("#city").val(user.city);
+                },
+                error: function (err) {
+                    alert("Error");
+                }
+            });
+
+
+        }
+    });
+
     function validatename() {
         let name = $("#name").val();
 
@@ -124,7 +156,7 @@
         if (validated) {
             let mydata = {
                 "data": {
-                    "id": 0,
+                    "id": $("#id").val(),
                     "name": name,
                     "email": email,
                     "mobile_no": mobile_no,
@@ -162,4 +194,19 @@
         var result = pattern.test(phone);
         return result;
     }
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+        return false;
+    };
 </script>
