@@ -1,30 +1,93 @@
 <main style="margin-top: 90px;">
     <div class="container">
-    <form action="create.html" method="post">
-        <h1 style="text-align: center;"> <b>  New Users Register Here!  </b> </h1>
-        <div >
-          <label>Your Name: </label>
-          <input type="text" name="name" id="name" placeholder="Enter Name" class="form-control">
-        </div>
-        
+        <h1 style="text-align: center;"> <b> New Users Register Here! </b> </h1>
         <div>
-          <label>Your Email: </label>
-          <input type="email" name="email" id="email" placeholder="Enter email"  class="form-control">
+            <label>Your Name*: 
+                <label id="msgname" style="color: red;"></label>
+            </label>
+            <input type="text" name="name" id="name" placeholder="Enter Name" class="form-control">
         </div>
-
-        <div >
-            <label>Your Mobile_No: </label>
-            <input type="number" name="mobile_no" id="mobile_no" placeholder="Enter mobile_no"  class="form-control">
-          </div>
-
-          <div>
-            <label>Your City: </label>
-            <input type="text" name="city" id="city" placeholder="Enter city"   class="form-control">
-          </div> <br>
 
         <div>
-            <button class="btn btn-primary rounded-circle">SAVE</button>
+            <label>Your Email*: 
+                <label id="msgemail" style="color: red;"></label>
+            </label>
+            <input type="email" name="email" id="email" placeholder="Enter email" class="form-control">
         </div>
-      </form>
+
+        <div>
+            <label>Your Mobile_No*: 
+                <label id="msgmobile_no" style="color: red;"></label>
+            </label>
+            <input type="number" name="mobile_no" id="mobile_no" placeholder="Enter mobile_no" class="form-control">
+        </div>
+
+        <div>
+            <label>Your City*: 
+                <label id="msgcity" style="color: red;"></label>
+            </label>
+            <input type="text" name="city" id="city" placeholder="Enter city" class="form-control">
+        </div> <br>
+
+        <div>
+            <button class="btn btn-primary rounded-circle" onclick="submit()">Submit</button>
+        </div>
+
     </div>
 </main>
+
+<script>
+    function submit() {
+
+        let name = $("#name").val();
+        let email = $("#email").val();
+        let mobile_no = $("#mobile_no").val();
+        let city = $("#city").val();
+
+        let validated=true;
+        $("#msgname").html("");
+        $("#msgemail").html("");
+        $("#msgmobile_no").html("");
+        $("#msgcity").html("");
+
+
+        if(name.trim()==""){
+          $("#msgname").html("Enter Name!");
+          validated=false;
+        }
+
+        if(email.trim()==""){
+          $("#msgemail").html("Enter Email!");
+          validated=false;
+        }else{
+            if(emailvalidate(email) == false){
+                $("#msgemail").html("Enter Valid Email!");
+                validated=false;
+            }
+        }
+
+        if(mobile_no.trim()==""){
+          $("#msgmobile_no").html("Enter Mobile No.!");
+          validated=false;
+        }
+
+        if(city.trim()==""){
+          $("#msgcity").html("Enter City!");
+          validated=false;
+        }
+
+    }
+    function emailvalidate()
+        {
+           var pattern = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
+           var result = pattern.test(email);
+           return result;
+        }
+
+        function phonevalidate()
+        {
+           var pattern = new RegExp(/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/);
+           var result = pattern.test(phone);
+           return result;
+        }
+</script>
